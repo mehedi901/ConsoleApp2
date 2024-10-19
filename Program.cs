@@ -29,12 +29,16 @@ public class FirstSelenium
 
         driver.FindElement(By.Id("username")).SendKeys("students");
         Console.WriteLine("Provide username");
+        test.Log(Status.Info, "Provide username");
+
 
         driver.FindElement(By.Id("password")).SendKeys("Password123");
         Console.WriteLine("Provide Password");
+        test.Log(Status.Info, "Provide Password");
 
         driver.FindElement(By.Id("submit")).Click();
         Console.WriteLine("Hit Submit button");
+        test.Log(Status.Info, "Hit Submit button");
         try
         {
             driver.FindElement(By.CssSelector(".wp-block-button__link")).Click();
