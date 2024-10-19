@@ -6,11 +6,13 @@ public class FirstSelenium
 {
     static void Main()
     {
+        CreateReportDirectorys();
+
         IWebDriver driver = new ChromeDriver();
 
         ExtentReports extentReports = new ExtentReports();
 
-        ExtentSparkReporter reportpath = new ExtentSparkReporter(@"D:\RepoortLocation\Report.html");
+        ExtentSparkReporter reportpath = new ExtentSparkReporter(@"D:\RepoortLocation\Report"+DateTime.Now.ToString("_dd/MM/yyyy_hhmmss")+".html");
 
         extentReports.AttachReporter(reportpath);
 
@@ -36,13 +38,23 @@ public class FirstSelenium
         try
         {
             driver.FindElement(By.CssSelector(".wp-block-button__link")).Click();
+            test.Log(Status.Pass, "Login Successfully");
         }
         catch
         {
             Console.WriteLine("Failed Login");
+            test.Log(Status.Fail, "Login Unsuccessful");
         }
         driver.Quit();
         extentReports.Flush();
 
+    }
+        private static void CreateReportDirectorys()
+    {
+        string ReportPath = @"D:\RepoortLocation\";
+        if (!Directory.Exists(ReportPath))
+        {
+            Directory.CreateDirectory(ReportPath);
+        } 
     }
 }
