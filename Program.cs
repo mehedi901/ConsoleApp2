@@ -45,12 +45,12 @@ public class FirstSelenium
         {
             driver.FindElement(By.Id("username")).SendKeys(testdata.username);
             Console.WriteLine("Provide username: "+ testdata.username);
-            test.Log(Status.Info, "Provide username");
+            test.Log(Status.Info, "Provide username: "+ testdata.username);
 
 
             driver.FindElement(By.Id("password")).SendKeys(testdata.password);
             Console.WriteLine("Provide Password:" + testdata.password);
-            test.Log(Status.Info, "Provide Password");
+            test.Log(Status.Info, "Provide Password: " + testdata.password);
 
         }
 
