@@ -52,23 +52,26 @@ public class FirstSelenium
             Console.WriteLine("Provide Password:" + testdata.password);
             test.Log(Status.Info, "Provide Password: " + testdata.password);
 
+            driver.FindElement(By.Id("submit")).Click();
+            Console.WriteLine("Hit Submit button");
+            test.Log(Status.Info, "Hit Submit button");
+            try
+            {
+                driver.FindElement(By.CssSelector(".wp-block-button__link")).Click();
+                test.Log(Status.Pass, "Login Successfully");
+                break;
+            }
+            catch
+            {
+                Console.WriteLine("Failed Login");
+                test.Log(Status.Fail, "Login Unsuccessful");
+            }
+
         }
 
 
 
-        driver.FindElement(By.Id("submit")).Click();
-        Console.WriteLine("Hit Submit button");
-        test.Log(Status.Info, "Hit Submit button");
-        try
-        {
-            driver.FindElement(By.CssSelector(".wp-block-button__link")).Click();
-            test.Log(Status.Pass, "Login Successfully");
-        }
-        catch
-        {
-            Console.WriteLine("Failed Login");
-            test.Log(Status.Fail, "Login Unsuccessful");
-        }
+        
         driver.Quit();
         extentReports.Flush();
 
