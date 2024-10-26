@@ -16,19 +16,23 @@ public class FirstSelenium
 
         var TestDtaList = ReadFile(DataCsvFile + "\\data\\data.csv");
 
-        //CreateReportDirectorys();
+        CreateReportDirectorys();
 
         IWebDriver driver = new ChromeDriver();
 
         ExtentReports extentReports = new ExtentReports();
 
-        ExtentSparkReporter reportpath = new ExtentSparkReporter(@"D:\RepoortLocation\Report"+DateTime.Now.ToString("_dd/MM/yyyy_hhmmss")+".html");
+        ExtentSparkReporter reportpath = new ExtentSparkReporter(@"D:\RepoortLocation\Report" + DateTime.Now.ToString("_dd/MM/yyyy_hhmmss") + ".html");
 
         extentReports.AttachReporter(reportpath);
 
         ExtentTest test = extentReports.CreateTest("Login Test", "This our first test Case");
 
         driver.Navigate().GoToUrl("https://practicetestautomation.com/practice-test-login/");
+
+    
+
+
 
         test.Log(Status.Info, "Open browser");
 
@@ -37,14 +41,20 @@ public class FirstSelenium
         driver.Manage().Window.Maximize();
         Console.WriteLine("Browser Maximize");
 
-        driver.FindElement(By.Id("username")).SendKeys("students");
-        Console.WriteLine("Provide username");
-        test.Log(Status.Info, "Provide username");
+        foreach (var testdata in TestDtaList)
+        {
+            driver.FindElement(By.Id("username")).SendKeys(testdata.username);
+            Console.WriteLine("Provide username: "+ testdata.username);
+            test.Log(Status.Info, "Provide username");
 
 
-        driver.FindElement(By.Id("password")).SendKeys("Password123");
-        Console.WriteLine("Provide Password");
-        test.Log(Status.Info, "Provide Password");
+            driver.FindElement(By.Id("password")).SendKeys(testdata.password);
+            Console.WriteLine("Provide Password:" + testdata.password);
+            test.Log(Status.Info, "Provide Password");
+
+        }
+
+
 
         driver.FindElement(By.Id("submit")).Click();
         Console.WriteLine("Hit Submit button");
@@ -63,14 +73,14 @@ public class FirstSelenium
         extentReports.Flush();
 
     }
-    //private static void CreateReportDirectorys()
-    //{
-    //    string ReportPath = @"D:\RepoortLocation\";
-    //    if (!Directory.Exists(ReportPath))
-    //    {
-    //        Directory.CreateDirectory(ReportPath);
-    //    }
-    //}
+    private static void CreateReportDirectorys()
+    {
+        string ReportPath = @"D:\RepoortLocation\";
+        if (!Directory.Exists(ReportPath))
+        {
+            Directory.CreateDirectory(ReportPath);
+        }
+    }
 
 
 
