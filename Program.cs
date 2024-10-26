@@ -1,11 +1,21 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
+using ConsoleApp2;
+using CsvHelper;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Globalization;
+
+
 public class FirstSelenium
 {
+    public static string DataCsvFile= System.IO.Directory.GetCurrentDirectory();
+
     static void Main()
     {
+
+        var TestDtaList = ReadFile(DataCsvFile + "\\data\\data.csv");
+
         CreateReportDirectorys();
 
         IWebDriver driver = new ChromeDriver();
@@ -53,12 +63,29 @@ public class FirstSelenium
         extentReports.Flush();
 
     }
-        private static void CreateReportDirectorys()
+    private static void CreateReportDirectorys()
     {
         string ReportPath = @"D:\RepoortLocation\";
         if (!Directory.Exists(ReportPath))
         {
             Directory.CreateDirectory(ReportPath);
-        } 
+        }
     }
+
+
+
+    static List<Testdata> ReadFile(string filePath)
+    {
+        using (var reader = new StreamReader(filePath))
+        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+        {
+            return new List<Testdata>(csv.GetRecords<Testdata>());
+        }
+    }
+
+
 }
+
+
+    
+

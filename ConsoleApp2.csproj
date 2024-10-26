@@ -8,10 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="33.0.1" />
     <PackageReference Include="ExtentReports" Version="5.0.4" />
     <PackageReference Include="Selenium.Support" Version="4.25.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.25.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="130.0.6723.5800" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="data\data.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
