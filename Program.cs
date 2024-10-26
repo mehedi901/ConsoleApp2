@@ -16,7 +16,7 @@ public class FirstSelenium
 
         var TestDtaList = ReadFile(DataCsvFile + "\\data\\data.csv");
 
-        CreateReportDirectorys();
+        //CreateReportDirectorys();
 
         IWebDriver driver = new ChromeDriver();
 
@@ -63,14 +63,14 @@ public class FirstSelenium
         extentReports.Flush();
 
     }
-    private static void CreateReportDirectorys()
-    {
-        string ReportPath = @"D:\RepoortLocation\";
-        if (!Directory.Exists(ReportPath))
-        {
-            Directory.CreateDirectory(ReportPath);
-        }
-    }
+    //private static void CreateReportDirectorys()
+    //{
+    //    string ReportPath = @"D:\RepoortLocation\";
+    //    if (!Directory.Exists(ReportPath))
+    //    {
+    //        Directory.CreateDirectory(ReportPath);
+    //    }
+    //}
 
 
 
